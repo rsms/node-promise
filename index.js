@@ -43,14 +43,9 @@ function promisev(args) {
   }
   return cl;
 }
-function promise(fun) {
-  var cl = mkpromise(fun);
-  if (fun) {
-    var cargs = Array.prototype.slice.call(arguments, 1);
-    cargs.push(cl.close);
-    fun.apply(fun, cargs);
-  }
-  return cl;
+exports.promisev = promisev;
+function promise(/*[fun, [arg0, arg1, ..]]*/) {
+  return promisev(arguments);
 }
 exports.promise = promise;
 
