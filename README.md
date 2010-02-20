@@ -25,6 +25,19 @@ A `promise` can either wrap an arbitrary operation, or it can be used as a stand
 If an error occurs in the middle of the chain (e.g. at fs.stat), the chain
 is broken and the outer promise is closed (called) with the error.
 
+To transform or operate on intermediate return values, you can pass a regular function to `then`:
+
+    promise(fs.stat, __filename)
+      .then(function(stats){
+        if (!stats.isFile())
+          throw new Error('not a file');
+        return promise(fs.cat, __filename)
+      })
+      (function(err, data){
+        if (err) throw err;
+        else sys.puts('successfully read '+data.length+' bytes.');
+      })
+
 ### Stand-alone promises and closing:
 
     function myAsyncFunction(fn) {
