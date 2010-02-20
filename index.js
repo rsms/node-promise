@@ -14,12 +14,11 @@
  * promise(fs.stat, filename)
  *  .then(fs.open, filename)
  *  .then(function(fd){
- *    return promise(fs.read(fd, 1024))
- *     .then(function(){ fs.close(fd); })
+ *    return promise(fs.read, fd, 1024)(function(){ fs.close(fd); })
  *  })
- *  (function(err){
+ *  (function(err, data){
  *    if (err) throw err;
- *    puts('done');
+ *    else puts('read '+data.length+' bytes');
  *  })
  *
  * Will first stat the file, then when stat successfully returns invoke
