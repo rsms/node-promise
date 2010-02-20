@@ -1,5 +1,9 @@
 # Chainable promises for node
 
+In node version 0.1.30 the previous built-in _promises_ was removed. This library gives you the option of adding in a very similar functionality.
+
+A `promise` cand either wrap an arbitrary operation or it can be used as a stand-alone "promise". These promises also have the ability to be _chained_ -- executing asynchronous operations in a sequential fashion, breaking the chain on any error.
+
 ## Usage:
 ### Simple:
 
@@ -21,7 +25,7 @@
 If an error occurs in the middle of the chain (e.g. at fs.stat), the chain
 is broken and the outer promise is closed (called) with the error.
 
-### Closing promises:
+### Stand-alone promises and closing:
 
     function myAsyncFunction(fn) {
       var p = promise();
